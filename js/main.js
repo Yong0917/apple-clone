@@ -1,4 +1,9 @@
 (() => {
+
+    let yOffset = 0; // window.pageYOffest 변수
+    let prevScrollHeight = 0; // 현재 스크롤 위치보다 이전에 위치한 스크롤 섹션들의 스크롤 높이들의 합
+    let cureentScene = 0; // 현재 활성화된(눈 앞에 보고있는) 씬
+
     const sceneInfo = [
         {
             // 0
@@ -45,11 +50,43 @@
             sceneInfo[i].objs.container.style.height = `${sceneInfo[i].scrollHeight}px` 
         }
 
-        window.addEventListener('resize', setLayout);
+        yOffset = window.pageYOffset;
+        let totalScrollHeight = 0;
+        for (let i = 0; i < sceneInfo.length; i++) {
+            totalScrollHeight += sceneInfo[i].scrollHeight;
+            if (totalScrollHeight >= yOffset) {
+                cureentScene = i;
+                break;
+            }
+        }
+        document.body.setAttribute('id', `show-scene-${cureentScene}`);
 
-        setLayout();
-        
     }
 
-    setLayout();
+    function scrollLoop() {
+        prevScrollHeight = 0;
+        for (let i = 0; i < cureentScene; i++) {
+            prevScrollHeight += sceneInfo[i].scrollHeight;
+        }
+        
+        if (yOffset > prevScrollHeight + sceneInfo[cureentScene].scrollHeight) {
+            cureentScene++;
+            document.body.setAttribute('id', `show-scene-${cureentScene}`);
+        }
+
+        if (yOffset < prevScrollHeight) {
+            if (cureentScene === 0) return; // 브라우저 바운스 효과 방지
+
+            cureentScene--;
+            document.body.setAttribute('id', `show-scene-${cureentScene}`);
+        }
+    }
+
+    window.addEventListener('scroll', () => {
+        yOffset = window.pageYOffset;
+        scrollLoop();
+    })
+    window.addEventListener('load', setLayout);
+    window.addEventListener('resize', setLayout);
+
 })();
