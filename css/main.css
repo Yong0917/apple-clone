@@ -72,6 +72,14 @@ a{
     font-size: 4rem;
     text-align: center;
 }
+#scroll-section-2 .b {
+    top: 10%;
+    left: 40%
+}
+#scroll-section-2 .c {
+    top: 15%;
+    left: 45%
+}
 
 .main-message {
     display: flex;
@@ -80,6 +88,7 @@ a{
     margin: 5px 0;
     height: 3em;
     font-size: 2.5em;
+    opacity: 0;
 }
 .main-message p {
     font-weight: bold;
@@ -146,7 +155,6 @@ a{
 .sticky-elem {
     display: none;
     position: fixed;
-    top: 0;
     left: 0;
     width: 100%;
 }
@@ -179,6 +187,13 @@ a{
     }
     .desc-message {
         width: 20%;
+    }
+    #scroll-section-2 .b {
+        top: 20%;
+        left: 53%
+    }
+    #scroll-section-2 .c {
+        left: 55%
     }
     .mid-message {
         font-size: 4vw;
