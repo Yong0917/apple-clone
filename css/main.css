@@ -188,6 +188,9 @@ body.before-load {
     display: block;
     will-change: transform, opacity;
 }
+.scroll-effect-end .sticky-elem {
+    display: none !important;
+}
 
 .sticky-elem-canvas {
     top: 0;
@@ -225,8 +228,14 @@ body.before-load {
     opacity: 0;
     transition: 0.5s;
 }
+.before-load .container {
+    display: none;
+}
 .before-load .loading {
     opacity: 1;
+}
+.normal-content {
+    margin-bottom: 10rem;
 }
 @keyframes loading-spin {
     100% { transform: rotate(360)}
